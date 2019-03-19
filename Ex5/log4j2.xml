@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Property name="log_path">out/${date:yy_MM_dd_HH_mm_ss}</Property>;
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <RollingFile name="main_logger" fileName="${log_path}/log.log"/>
+
+        <AsyncFile name="async_main_logger">
+            <AppendingRef ref="main_logger"/>
+        </AsyncFile>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="com.vladooha.Main" level="info">
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Root level="info">
+            <AppenderRef ref="async_main_logger"/>
+        </Root>
+    </Loggers>
+</Configuration>
